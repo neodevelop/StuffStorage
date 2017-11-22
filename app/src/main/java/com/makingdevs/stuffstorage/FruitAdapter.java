@@ -35,7 +35,7 @@ public class FruitAdapter extends RecyclerView.Adapter<FruitAdapter.FruitViewHol
         holder.mFruitKind.setText(fruit.getKind());
         holder.mFruitSize.setText(fruit.getSize());
         holder.mFruitProperty.setText(fruit.getProperty());
-        holder.mFruitBenefit.setText(fruit.get());
+        holder.mFruitBenefit.setText(fruit.getBenefit());
     }
 
     @Override

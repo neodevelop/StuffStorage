@@ -39,9 +39,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void prepareData(){
-        fruitList.add(new Fruit("Manzana"));
-        fruitList.add(new Fruit("Mango"));
-        fruitList.add(new Fruit("Uvas"));
+        fruitList.add(new Fruit("Tipo 1", "Chica", "Punch", "Rifadez"));
+        fruitList.add(new Fruit("Tipo 2", "Chica", "Punch", "Rifadez"));
+        fruitList.add(new Fruit("Tipo 3", "Chica", "Punch", "Rifadez"));
         fruitAdapter.notifyDataSetChanged();
     }
 
