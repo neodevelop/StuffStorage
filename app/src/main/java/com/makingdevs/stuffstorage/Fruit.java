@@ -6,17 +6,60 @@ package com.makingdevs.stuffstorage;
 
 public class Fruit {
 
-    private String name;
+    private String kind;
+    private String size;
+    private String property;
+    private String benefit;
 
-    public Fruit(){}
-
-    public Fruit(String name){ this.name = name; }
-
-    public String getName() {
-        return name;
+    public Fruit() {
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public Fruit(String kind, String size, String property, String benfit) {
+        this.kind = kind;
+        this.size = size;
+        this.property = property;
+        this.benefit = benfit;
+    }
+
+    @Override
+    public String toString() {
+        return "Fruit{" +
+                "kind='" + kind + '\'' +
+                ", size='" + size + '\'' +
+                ", property='" + property + '\'' +
+                ", benefit='" + benefit + '\'' +
+                '}';
+    }
+
+    public String getKind() {
+        return kind;
+    }
+
+    public void setKind(String kind) {
+        this.kind = kind;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
+
+    public String getProperty() {
+        return property;
+    }
+
+    public void setProperty(String property) {
+        this.property = property;
+    }
+
+    public String getBenefit() {
+        return benefit;
+    }
+
+    public void setBenefit(String benefit) {
+        this.benefit = benefit;
     }
 }

@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">StuffStorage</string>
+    <string name="add">Agregar</string>
+    <string name="list">Lista</string>
+    <string name="kind">Tipo</string>
+    <string name="fruit_size">Tamaño</string>
+    <string name="fruit_kind">Tipo</string>
+    <string name="fruit_property">Propiedad</string>
+    <string name="fruit_benefit">Beneficio</string>
 </resources>

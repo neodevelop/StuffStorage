@@ -32,7 +32,10 @@ public class FruitAdapter extends RecyclerView.Adapter<FruitAdapter.FruitViewHol
     @Override
     public void onBindViewHolder(FruitViewHolder holder, int position) {
         Fruit fruit = mFruits.get(position);
-        holder.mFruitName.setText(fruit.getName());
+        holder.mFruitKind.setText(fruit.getKind());
+        holder.mFruitSize.setText(fruit.getSize());
+        holder.mFruitProperty.setText(fruit.getProperty());
+        holder.mFruitBenefit.setText(fruit.get());
     }
 
     @Override
@@ -42,11 +45,17 @@ public class FruitAdapter extends RecyclerView.Adapter<FruitAdapter.FruitViewHol
 
     class FruitViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView mFruitName;
+        private TextView mFruitKind;
+        private TextView mFruitSize;
+        private TextView mFruitProperty;
+        private TextView mFruitBenefit;
 
         public FruitViewHolder(View itemView) {
             super(itemView);
-            mFruitName = (TextView) itemView.findViewById(R.id.fruit_name);
+            mFruitKind = (TextView) itemView.findViewById(R.id.fruit_kind);
+            mFruitSize = (TextView) itemView.findViewById(R.id.fruit_size);
+            mFruitProperty = (TextView) itemView.findViewById(R.id.fruit_property);
+            mFruitBenefit = (TextView) itemView.findViewById(R.id.fruit_benefit);
         }
 
     }
