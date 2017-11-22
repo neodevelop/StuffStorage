@@ -8,6 +8,8 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -39,6 +41,29 @@ public class MainActivity extends AppCompatActivity {
     private void prepareData(){
         fruitList.add(new Fruit("Manzana"));
         fruitList.add(new Fruit("Mango"));
+        fruitList.add(new Fruit("Uvas"));
         fruitAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.add_in_button:
+                System.out.println("ADD");
+                break;
+            case R.id.add_in_menu:
+                System.out.println("ADD 2");
+                break;
+            case R.id.list:
+                System.out.println("LIST");
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
