@@ -23,14 +23,14 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerView mFruitList;
     private FruitAdapter fruitAdapter;
-    private List<Fruit> fruitList = new ArrayList<Fruit>();
+    private FruitManager fruitManager = FruitManager.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mFruitList = (RecyclerView) findViewById(R.id.fruit_list);
-        fruitAdapter = new FruitAdapter(fruitList);
+        fruitAdapter = new FruitAdapter(fruitManager);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         mFruitList.setLayoutManager(mLayoutManager);
         mFruitList.setItemAnimator(new DefaultItemAnimator());
@@ -39,9 +39,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void prepareData(){
-        fruitList.add(new Fruit("Tipo 1", "Chica", "Punch", "Rifadez"));
-        fruitList.add(new Fruit("Tipo 2", "Chica", "Punch", "Rifadez"));
-        fruitList.add(new Fruit("Tipo 3", "Chica", "Punch", "Rifadez"));
+        fruitManager.addFruit(new Fruit("Tipo 1", "Chica", "Punch", "Rifadez"));
+        fruitManager.addFruit(new Fruit("Tipo 2", "Chica", "Punch", "Rifadez"));
+        fruitManager.addFruit(new Fruit("Tipo 3", "Chica", "Punch", "Rifadez"));
+        fruitManager.addFruit(new Fruit("Tipo 4", "Chica", "Punch", "Rifadez"));
+        fruitManager.addFruit(new Fruit("Tipo 5", "Chica", "Punch", "Rifadez"));
+        fruitManager.addFruit(new Fruit("Tipo 6", "Chica", "Punch", "Rifadez"));
+        fruitManager.addFruit(new Fruit("Tipo 7", "Chica", "Punch", "Rifadez"));
+        fruitManager.addFruit(new Fruit("Tipo 8", "Chica", "Punch", "Rifadez"));
         fruitAdapter.notifyDataSetChanged();
     }
 

@@ -17,8 +17,8 @@ public class FruitAdapter extends RecyclerView.Adapter<FruitAdapter.FruitViewHol
 
     private List<Fruit> mFruits;
 
-    public FruitAdapter(List fruits){
-        this.mFruits = fruits;
+    public FruitAdapter(FruitManager fruitManager){
+        this.mFruits = fruitManager.getFruits();
     }
 
     @Override
