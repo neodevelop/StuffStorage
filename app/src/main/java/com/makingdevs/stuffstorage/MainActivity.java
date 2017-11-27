@@ -2,6 +2,7 @@ package com.makingdevs.stuffstorage;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -60,7 +61,8 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()){
             case R.id.add_in_button:
-                System.out.println("ADD");
+                Intent intent = NewFruitActivity.newIntentWithContext(this.getBaseContext());
+                startActivity(intent);
                 break;
             case R.id.add_in_menu:
                 System.out.println("ADD 2");
