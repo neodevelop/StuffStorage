@@ -7,4 +7,5 @@
     <string name="fruit_kind">Tipo</string>
     <string name="fruit_property">Propiedad</string>
     <string name="fruit_benefit">Beneficio</string>
+    <string name="send">Enviar la frutosa</string>
 </resources>
