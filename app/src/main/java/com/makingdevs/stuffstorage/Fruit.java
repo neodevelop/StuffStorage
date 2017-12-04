@@ -6,6 +6,7 @@ package com.makingdevs.stuffstorage;
 
 public class Fruit {
 
+    private Integer id;
     private String kind;
     private String size;
     private String property;
@@ -29,6 +30,14 @@ public class Fruit {
                 ", property='" + property + '\'' +
                 ", benefit='" + benefit + '\'' +
                 '}';
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getKind() {
