@@ -58,12 +58,6 @@ public class FruitManager {
     }
 
     public List<Fruit> getFruits(){
-        Call<List<Fruit>> call = fruitService.listFruits();
-        try {
-            fruits = call.execute().body();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         //call.enqueue(new Callback<List<Fruit>>() {
         //    @Override
         //    public void onResponse(Call<List<Fruit>> call, Response<List<Fruit>> response) {
