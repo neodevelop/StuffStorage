@@ -15,12 +15,12 @@ import retrofit2.http.Path;
 
 public interface FruitService {
 
-    @GET("/fruit")
+    @GET("fruit")
     Call<List<Fruit>> listFruits();
 
-    @GET("/fruit/{id}")
+    @GET("fruit/{id}")
     Call<Fruit> getSingleFruit(@Path("id") int id);
 
-    @POST("/fruit")
+    @POST("fruit")
     Call<Fruit> saveFruit(@Body Fruit fruit);
 }
