@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.ListPopupWindow;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -59,16 +58,6 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println("ADD 2");
                 break;
             case R.id.list:
-                Gson gson = new GsonBuilder()
-                        .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
-                        .create();
-                Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl("http://192.168.1.134:8080/v1/")
-                        .addConverterFactory(GsonConverterFactory.create(gson))
-                        .build();
-                FruitService fruitService = retrofit.create(FruitService.class);
-                Call <List<Fruit>> call = fruitService.listFruits();
-                new NetworkCall().execute(call);
                 System.out.println("LIST");
                 break;
         }

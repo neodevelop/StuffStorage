@@ -58,23 +58,6 @@ public class FruitManager {
     }
 
     public List<Fruit> getFruits(){
-        //call.enqueue(new Callback<List<Fruit>>() {
-        //    @Override
-        //    public void onResponse(Call<List<Fruit>> call, Response<List<Fruit>> response) {
-        //        List<Fruit> someFruits = response.body();
-        //        System.out.println("**************************");
-        //        System.out.println(someFruits);
-        //        System.out.println(response.raw());
-        //        System.out.println("**************************");
-        //        fruits = someFruits;
-        //    }
-
-        //    @Override
-        //    public void onFailure(Call<List<Fruit>> call, Throwable t) {
-        //        System.err.println("ERRORZ: " + t.getMessage());
-        //        t.printStackTrace();
-        //    }
-        //});
         return fruits;
     }
 
