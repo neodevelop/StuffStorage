@@ -72,8 +72,9 @@ public class MainActivity extends AppCompatActivity {
                 fruit.setKind(data.getStringExtra("com.fruits.kind"));
                 fruit.setSize(data.getStringExtra("com.fruits.size"));
                 fruit.setProperty(data.getStringExtra("com.fruits.property"));
-                //fruitManager.addFruit(fruit);
-                //fruitAdapter.notifyDataSetChanged();
+                Call call = fruitService.saveFruit(fruit);
+                new RemoteListFruits().execute(call);
+                System.out.println(fruit);
             }
         }
     }
@@ -90,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent2, REQUEST_CODE_FRUIT);
                 break;
             case R.id.list:
-                System.out.println("LIST");
+                updateAdapter();
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -101,6 +102,12 @@ public class MainActivity extends AppCompatActivity {
         Call<List<Fruit>> call = fruitService.listFruits();
         new RemoteListFruits().execute(call);
         super.onResume();
+    }
+
+    private void updateAdapter(){
+        fruitAdapter = new FruitAdapter(mFruits);
+        mFruitList.setAdapter(fruitAdapter);
+        fruitAdapter.notifyDataSetChanged();
     }
 
     private class RemoteListFruits extends AsyncTask<Call, Void, List<Fruit>> {
@@ -121,9 +128,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(List<Fruit> fruits) {
             mFruits = fruits;
-            fruitAdapter = new FruitAdapter(mFruits);
-            mFruitList.setAdapter(fruitAdapter);
-            fruitAdapter.notifyDataSetChanged();
+            updateAdapter();
         }
     }
 }
