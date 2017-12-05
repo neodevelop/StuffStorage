@@ -1,5 +1,7 @@
 package com.makingdevs.stuffstorage;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,8 +17,10 @@ import java.util.List;
 public class FruitAdapter extends RecyclerView.Adapter<FruitAdapter.FruitViewHolder> {
 
     private List<Fruit> mFruits;
+    private Context mContext;
 
-    public FruitAdapter(List<Fruit> fruits){
+    public FruitAdapter(Context context, List<Fruit> fruits){
+        this.mContext = context;
         this.mFruits = fruits;
     }
 
@@ -35,6 +39,7 @@ public class FruitAdapter extends RecyclerView.Adapter<FruitAdapter.FruitViewHol
         holder.mFruitSize.setText(fruit.getSize());
         holder.mFruitProperty.setText(fruit.getProperty());
         holder.mFruitBenefit.setText(fruit.getBenefit());
+        holder.bindFruit(fruit);
     }
 
     @Override
@@ -55,6 +60,17 @@ public class FruitAdapter extends RecyclerView.Adapter<FruitAdapter.FruitViewHol
             mFruitSize = (TextView) itemView.findViewById(R.id.fruit_size);
             mFruitProperty = (TextView) itemView.findViewById(R.id.fruit_property);
             mFruitBenefit = (TextView) itemView.findViewById(R.id.fruit_benefit);
+        }
+
+        public void bindFruit(final Fruit fruit) {
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = ShowFruitActivity.newIntentWithContext(mContext, fruit);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    mContext.startActivity(intent);
+                }
+            });
         }
 
     }

@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_FRUIT = 0;
     private RecyclerView mFruitList;
     private FruitAdapter fruitAdapter;
-    private FruitManager fruitManager = FruitManager.getInstance();
     private static FruitService fruitService;
     private List<Fruit> mFruits = null;
 
@@ -105,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateAdapter(){
-        fruitAdapter = new FruitAdapter(mFruits);
+        fruitAdapter = new FruitAdapter(getBaseContext(), mFruits);
         mFruitList.setAdapter(fruitAdapter);
         fruitAdapter.notifyDataSetChanged();
     }
