@@ -36,7 +36,7 @@ public class FruitManager {
                     .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
                     .create();
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl("http://192.168.0.8:8080/v1/")
+                    .baseUrl("http://192.168.1.134:8080/v1/")
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .build();
            fruitService = retrofit.create(FruitService.class);

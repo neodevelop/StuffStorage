@@ -2,6 +2,7 @@ package com.makingdevs.stuffstorage;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -13,9 +14,11 @@ import android.view.MenuItem;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.io.IOException;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -25,17 +28,29 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView mFruitList;
     private FruitAdapter fruitAdapter;
     private FruitManager fruitManager = FruitManager.getInstance();
+    private static FruitService fruitService;
+    private List<Fruit> mFruits = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mFruitList = (RecyclerView) findViewById(R.id.fruit_list);
-        fruitAdapter = new FruitAdapter(fruitManager.getFruits());
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+
+        if(fruitService == null){
+            Gson gson = new GsonBuilder()
+                    .setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
+                    .create();
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl("http://192.168.1.134:8080/v1/")
+                    .addConverterFactory(GsonConverterFactory.create(gson))
+                    .build();
+            fruitService = retrofit.create(FruitService.class);
+        }
+
         mFruitList.setLayoutManager(mLayoutManager);
         mFruitList.setItemAnimator(new DefaultItemAnimator());
-        mFruitList.setAdapter(fruitAdapter);
     }
 
     @Override
@@ -57,8 +72,8 @@ public class MainActivity extends AppCompatActivity {
                 fruit.setKind(data.getStringExtra("com.fruits.kind"));
                 fruit.setSize(data.getStringExtra("com.fruits.size"));
                 fruit.setProperty(data.getStringExtra("com.fruits.property"));
-                fruitManager.addFruit(fruit);
-                fruitAdapter.notifyDataSetChanged();
+                //fruitManager.addFruit(fruit);
+                //fruitAdapter.notifyDataSetChanged();
             }
         }
     }
@@ -76,7 +91,6 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.list:
                 System.out.println("LIST");
-                System.out.println(fruitManager.getFruits());
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -84,8 +98,32 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-        fruitManager.getFruits();
-        fruitAdapter.notifyDataSetChanged();
+        Call<List<Fruit>> call = fruitService.listFruits();
+        new RemoteListFruits().execute(call);
         super.onResume();
+    }
+
+    private class RemoteListFruits extends AsyncTask<Call, Void, List<Fruit>> {
+        @Override
+        protected List<Fruit> doInBackground(Call... calls) {
+            try {
+                Call<List<Fruit>> call = calls[0];
+                Response<List<Fruit>> response = call.execute();
+                List<Fruit> fruits = response.body();
+                return fruits;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+
+        }
+
+        @Override
+        protected void onPostExecute(List<Fruit> fruits) {
+            mFruits = fruits;
+            fruitAdapter = new FruitAdapter(mFruits);
+            mFruitList.setAdapter(fruitAdapter);
+            fruitAdapter.notifyDataSetChanged();
+        }
     }
 }
