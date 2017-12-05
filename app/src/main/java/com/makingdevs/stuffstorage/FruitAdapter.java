@@ -17,8 +17,11 @@ public class FruitAdapter extends RecyclerView.Adapter<FruitAdapter.FruitViewHol
 
     private List<Fruit> mFruits;
 
-    public FruitAdapter(FruitManager fruitManager){
-        this.mFruits = fruitManager.getFruits();
+    public FruitAdapter(List<Fruit> fruits){
+        this.mFruits = fruits;
+        System.out.println("-------------------------------");
+        System.out.println(mFruits);
+        System.out.println("-------------------------------");
     }
 
     @Override

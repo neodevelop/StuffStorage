@@ -31,16 +31,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mFruitList = (RecyclerView) findViewById(R.id.fruit_list);
-        fruitAdapter = new FruitAdapter(fruitManager);
+        fruitAdapter = new FruitAdapter(fruitManager.getFruits());
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         mFruitList.setLayoutManager(mLayoutManager);
         mFruitList.setItemAnimator(new DefaultItemAnimator());
         mFruitList.setAdapter(fruitAdapter);
-        //prepareData();
-    }
-
-    private void prepareData(){
-        fruitAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -76,10 +71,12 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent, REQUEST_CODE_FRUIT);
                 break;
             case R.id.add_in_menu:
-                System.out.println("ADD 2");
+                Intent intent2 = NewFruitActivity.newIntentWithContext(this.getBaseContext());
+                startActivityForResult(intent2, REQUEST_CODE_FRUIT);
                 break;
             case R.id.list:
                 System.out.println("LIST");
+                System.out.println(fruitManager.getFruits());
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -87,8 +84,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-        System.out.println("onResume");
         fruitManager.getFruits();
+        fruitAdapter.notifyDataSetChanged();
         super.onResume();
     }
 }
