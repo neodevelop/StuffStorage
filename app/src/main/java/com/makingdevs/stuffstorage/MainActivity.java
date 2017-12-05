@@ -1,5 +1,6 @@
 package com.makingdevs.stuffstorage;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +21,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final int REQUEST_CODE_FRUIT = 0;
     private RecyclerView mFruitList;
     private FruitAdapter fruitAdapter;
     private FruitManager fruitManager = FruitManager.getInstance();
@@ -48,11 +50,30 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == REQUEST_CODE_FRUIT){
+            if(resultCode == Activity.RESULT_OK) {
+                if(data == null){
+                    System.out.println("NO DATA");
+                    return;
+                }
+                Fruit fruit = new Fruit();
+                fruit.setBenefit(data.getStringExtra("com.fruits.benefit"));
+                fruit.setKind(data.getStringExtra("com.fruits.kind"));
+                fruit.setSize(data.getStringExtra("com.fruits.size"));
+                fruit.setProperty(data.getStringExtra("com.fruits.property"));
+                fruitManager.addFruit(fruit);
+                fruitAdapter.notifyDataSetChanged();
+            }
+        }
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()){
             case R.id.add_in_button:
                 Intent intent = NewFruitActivity.newIntentWithContext(this.getBaseContext());
-                startActivity(intent);
+                startActivityForResult(intent, REQUEST_CODE_FRUIT);
                 break;
             case R.id.add_in_menu:
                 System.out.println("ADD 2");

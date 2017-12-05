@@ -58,6 +58,7 @@ public class FruitManager {
     }
 
     public List<Fruit> getFruits(){
+
         return fruits;
     }
 
