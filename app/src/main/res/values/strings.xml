@@ -8,4 +8,5 @@
     <string name="fruit_property">Propiedad</string>
     <string name="fruit_benefit">Beneficio</string>
     <string name="send">Enviar la frutosa</string>
+    <string name="delete">Borrar la frutilla</string>
 </resources>
